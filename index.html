@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Risset Beats - GwionSamples</title>
+        <title>Gwion Samples - GwionSamples</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -74,7 +74,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="risset_beats.html">Risset Beats</a></li><li class="chapter-item expanded affix "><a href="sporth.html">A sporth sample</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html" class="active">Gwion Samples</a></li><li class="chapter-item expanded affix "><a href="risset_beats.html">Risset Beats</a></li><li class="chapter-item expanded affix "><a href="sporth.html">A sporth sample</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -133,37 +133,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="risset-beats"><a class="header" href="#risset-beats">Risset Beats</a></h1>
-<p>using beating frequencies to compose music. </p>
-<pre><code class="language-gwion editable">#import STK
-
-5.0 =&gt; var float songlength;
-
-[880.0, 587.0, 440.0, 392.0, 370.0, 392.0] =&gt; var float freqs[];
-[0.5, 1.5, 2.5, 3.0, 3.5, 4.0] =&gt; var float soundtimes[];
-[0.5, 0.5, 1.0, 1.0, 1.0, 1.0] =&gt; var float amps[];
-[20, 20, 20, 20, 20, 20] =&gt; var int num[];
-
-var stk.SineWave s[freqs.size()][0];
-var Gain g[freqs.size()][0];
-
-repeat(i, freqs.size()) {
-    new stk.SineWave[num[i]] =&gt; s[i];
-    new Gain[num[i]] =&gt; g[i];
-    0.5 / num[i] =&gt; const float scale;
-    repeat(j, num[i]) {
-        freqs[i] + j * 1.0 / songlength =&gt; const float freq;
-        freq * soundtimes[i]  =&gt; const float phase;
-        phase =&gt; s[i][j].addPhase;
-        freq =&gt; s[i][j].setFrequency;
-        s[i][j] ~&gt; g[i][j] ~&gt; dac;
-        amps[i]*scale =&gt; g[i][j].gain;
-    }
-}
-
-songlength::minute =&gt; now;
-
-</code></pre>
+                        <h1 id="gwion-samples"><a class="header" href="#gwion-samples">Gwion Samples</a></h1>
+<p>lorem ipsum</p>
 <!-- added by doc2src.sh -->
 <footer>
 built with <a href="https://github.com/rust-lang/mdBook/">mdBook</a></br>
@@ -174,7 +145,7 @@ You'll find the source <a href="https://github.com/Gwion/Gwion">here</a>, Luke!
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="sporth.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="risset_beats.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -183,7 +154,7 @@ You'll find the source <a href="https://github.com/Gwion/Gwion">here</a>, Luke!
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="sporth.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="risset_beats.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
