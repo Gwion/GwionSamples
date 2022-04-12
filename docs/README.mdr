@@ -1,3 +1,7 @@
 # Gwion Samples
 
 lorem ipsum
+
+```gwion,editable
+<<< "Hello, World!" >>>;
+```
