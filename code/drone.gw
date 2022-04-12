@@ -1,0 +1,28 @@
+#import Modules
+
+fun void osc(float osc_freq, float total, float amp: .75) {
+	var SawOsc sin ~> dac;
+
+	osc_freq => sin.freq;
+	amp / total => sin.amp;
+
+	while (true)
+		minute => now;
+}
+
+300   => const int total;            #! total oscillators to distribute over the number of harmonics
+5     => const int harmonics;        #! number of harmonics to create based on the multiplication of the base frequency
+0.005 => const float freq_variance;  #! frequency offset between oscillators
+40    => const float base_freq;      #! base frequency to use for the harmonics
+.75   => const float amp;            #! 0-1 gain
+
+for (0 => var int j; j < harmonics; j++) {
+	for (1 => var int i; i < (total / harmonics) + 1; i++) {
+		((i * freq_variance) + j) + (base_freq * j) => const auto freq;
+		spork osc(freq, total, amp);
+
+		<<< "harmonic ${j + 1}/${harmonics} => osc ${i}/${total / harmonics} @ ${freq}Hz" >>>;
+	}
+}
+
+10::minute=> now;
