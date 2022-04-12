@@ -1,0 +1,8 @@
+# N-Oscillator Drone
+
+An interesting soundscape created by layering harmonics on top of a base frequency and offsetting every oscillator's pitch by a tiny amount.
+
+```gwion,editable
+@[[code/drone.gw]]
+```
+
