@@ -9,6 +9,6 @@ this repo is meant to hold useful gwion codes.
 
   * create a `.mdr` file in the `docs` directory
 
-  * add your file to `docs/SUMMARY.mdr`
+  * add your file (with a md suffix) to `docs/list`
 
 you can see what the mdr file should look like by looking at `docs/risset_beats.mdr`
