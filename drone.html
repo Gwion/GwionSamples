@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Gwion Samples - GwionSamples</title>
+        <title>N-Oscillator Drone - GwionSamples</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -74,7 +74,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html" class="active">Gwion Samples</a></li><li class="chapter-item expanded affix "><a href="risset_beats.html">Risset Beats</a></li><li class="chapter-item expanded affix "><a href="sporth.html">A sporth sample</a></li><li class="chapter-item expanded affix "><a href="drone.html">N-Oscillator Drone</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Gwion Samples</a></li><li class="chapter-item expanded affix "><a href="risset_beats.html">Risset Beats</a></li><li class="chapter-item expanded affix "><a href="sporth.html">A sporth sample</a></li><li class="chapter-item expanded affix "><a href="drone.html" class="active">N-Oscillator Drone</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -133,8 +133,38 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="gwion-samples"><a class="header" href="#gwion-samples">Gwion Samples</a></h1>
-<p>lorem ipsum</p>
+                        <h1 id="n-oscillator-drone"><a class="header" href="#n-oscillator-drone">N-Oscillator Drone</a></h1>
+<p>An interesting soundscape created by layering harmonics on top of a base frequency and offsetting every oscillator's pitch by a tiny amount.</p>
+<pre><code class="language-gwion editable">#import Modules
+
+fun void osc(float osc_freq, float total, float amp: .75) {
+	var SawOsc sin ~&gt; dac;
+
+	osc_freq =&gt; sin.freq;
+	amp / total =&gt; sin.amp;
+
+	while (true)
+		minute =&gt; now;
+}
+
+300   =&gt; const int total;            #! total oscillators to distribute over the number of harmonics
+5     =&gt; const int harmonics;        #! number of harmonics to create based on the multiplication of the base frequency
+0.005 =&gt; const float freq_variance;  #! frequency offset between oscillators
+40    =&gt; const float base_freq;      #! base frequency to use for the harmonics
+.75   =&gt; const float amp;            #! 0-1 gain
+
+for (0 =&gt; var int j; j &lt; harmonics; j++) {
+	for (1 =&gt; var int i; i &lt; (total / harmonics) + 1; i++) {
+		((i * freq_variance) + j) + (base_freq * j) =&gt; const auto freq;
+		spork osc(freq, total, amp);
+
+		&lt;&lt;&lt; &quot;harmonic ${j + 1}/${harmonics} =&gt; osc ${i}/${total / harmonics} @ ${freq}Hz&quot; &gt;&gt;&gt;;
+	}
+}
+
+10::minute=&gt; now;
+
+</code></pre>
 <!-- added by doc2src.sh -->
 <footer>
 built with <a href="https://github.com/rust-lang/mdBook/">mdBook</a></br>
@@ -145,8 +175,8 @@ You'll find the source <a href="https://github.com/Gwion/Gwion">here</a>, Luke!
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="next" href="risset_beats.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="sporth.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
                         <div style="clear: both"></div>
                     </nav>
@@ -154,8 +184,8 @@ You'll find the source <a href="https://github.com/Gwion/Gwion">here</a>, Luke!
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="next" href="risset_beats.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="sporth.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
             </nav>
 
