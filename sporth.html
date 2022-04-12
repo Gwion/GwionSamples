@@ -136,8 +136,8 @@
                         <h1 id="a-sporth-sample"><a class="header" href="#a-sporth-sample">A sporth sample</a></h1>
 <p><a href="https://github.com/Gwion/gwion-sporth">Sporth</a> (short for SoundPipe fORTH), is a small stack-based musical language, roughly inspired by stack languages like Forth and PostScript.</p>
 <p>It is embedded in a plugin.</p>
-<pre><code class="language-gwion editable">#require Sporth
-#require Math
+<pre><code class="language-gwion editable">#import Sporth
+#import Math
 
 110 =&gt; const float bpm;
 (60.0 / bpm) :: second =&gt; const dur t;
@@ -176,6 +176,7 @@ fun void loop_me(const int root) {
 spork loop_me(60);
 spork loop_me(36);
 minute =&gt; now;
+
 </code></pre>
 <!-- added by doc2src.sh -->
 <footer>
