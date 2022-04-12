@@ -1,6 +1,6 @@
 # A sporth sample
 
-[Sporth](https://github.com/Gwion/gwion-sporth) Sporth (short for SoundPipe fORTH), is a small stack-based musical language, roughly inspired by stack languages like Forth and PostScript.
+[Sporth](https://github.com/Gwion/gwion-sporth) (short for SoundPipe fORTH), is a small stack-based musical language, roughly inspired by stack languages like Forth and PostScript.
 
 It is embedded in a plugin.
 
