@@ -1,0 +1,48 @@
+# A sporth sample
+
+[Sporth](https://github.com/Gwion/gwion-sporth) Sporth (short for SoundPipe fORTH), is a small stack-based musical language, roughly inspired by stack languages like Forth and PostScript.
+
+It is embedded in a plugin.
+
+```gwion,editable
+#require Sporth
+#require Math
+
+110 => const float bpm;
+(60.0 / bpm) :: second => const dur t;
+[0, 1, 5, 7, 8] => const int scale[];
+
+fun void loop_me(const int root) {
+  var int stp;
+  var int nbars;
+  var int block;
+
+  var Sporth s ~> dac;
+  s.parse("0 p 0.01 port mtof 1 p 0.003 port 1 1 2 p 0.01 port fm 0.5 * dup dup 0.94 10000 revsc drop 0.1 * +");
+  s.p(1, 0.2);
+
+  root => var int base;
+  while(true) {
+    if(stp == 0) {
+        s.p(1, 0.4);
+        nbars++;
+    } else
+      s.p(1, 0.4);
+    if(nbars > block) {
+      if(base == root)
+        53 => base;
+      else
+        60 => base;
+      1 => nbars;
+    }
+    s.p(0, base + scale[stp] + 12 * Math.rand2(-1, 1));
+    s.p(2, Math.rand2f(0.1, 3));
+    0.25::t => now;
+    (stp + 1) % scale.size() => stp;
+  }
+}
+
+spork loop_me(60);
+spork loop_me(36);
+minute => now;
+```

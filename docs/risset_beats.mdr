@@ -1,0 +1,8 @@
+# Risset Beats
+
+
+using beating frequencies to compose music. 
+
+```gwion,editable
+@[[code/risset_beats.gw]]
+```
