@@ -4,3 +4,23 @@ language = "en"
 multilingual = false
 src = "src"
 title = "GwionSamples"
+
+[output.html]
+default-theme = "coal"
+additional-css = ["custom.css", "ansi2html.css"]
+git-repository-url ="https://github.com/Gwion/GwionSamples"
+site-url = "/GwionSamples/"
+
+[output.html.fold]
+enable = true
+level = 0
+
+[output.html.search]
+use-boolean-and = true
+boost-title = 3
+boost-hierarchy = 2
+boost-paragraph = 1
+
+[output.html.playground]
+line-numbers= false
+editable = true
