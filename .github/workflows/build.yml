@@ -28,10 +28,11 @@ jobs:
     - name: Build book
       run: PATH=$PWD:$PATH make build
 
-    - name: Push book
-      run: |
-        git add -f book
-        git commit -m "add book"
-        git remote set-url origin https://${{ secrets.GWIONSAMPLES_TOKEN }}@github.com/Gwion/GwionSamples.git
-        git push origin :gh-pages || true
-        git subtree push --prefix book origin gh-pages
+    - name: Deploy to GitHub Pages
+      uses: Cecilapp/GitHub-Pages-deploy@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        email: fennecdjay@gmail.com
+        jekyll: no
+        build_dir: book
