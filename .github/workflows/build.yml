@@ -14,9 +14,9 @@ jobs:
 
     - name: Checkout tools repo
       uses: actions/checkout@v3
-      with:
-      repository: Gwion/GwionSite
-      path: GwionSite
+        with:
+        repository: Gwion/GwionSite
+        path: GwionSite
 
     - name: GwionSite tools
       run: bash GwionSite/install.sh
