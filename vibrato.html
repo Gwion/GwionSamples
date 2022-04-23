@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Risset Beats - GwionSamples</title>
+        <title>Simple vibrato examples - GwionSamples</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><a href="index.html">Gwion Samples</a></li><li class="chapter-item affix "><a href="vibrato.html">Simple vibrato examples</a></li><li class="chapter-item affix "><a href="risset_beats.html" class="active">Risset Beats</a></li><li class="chapter-item affix "><a href="sporth.html">A sporth sample</a></li><li class="chapter-item affix "><a href="drone.html">N-Oscillator Drone</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><a href="index.html">Gwion Samples</a></li><li class="chapter-item affix "><a href="vibrato.html" class="active">Simple vibrato examples</a></li><li class="chapter-item affix "><a href="risset_beats.html">Risset Beats</a></li><li class="chapter-item affix "><a href="sporth.html">A sporth sample</a></li><li class="chapter-item affix "><a href="drone.html">N-Oscillator Drone</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -138,35 +138,38 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="risset-beats"><a class="header" href="#risset-beats">Risset Beats</a></h1>
-<p>using beating frequencies to compose music. </p>
-<pre><code class="language-gwion editable">#import STK
+                        <h1 id="simple-vibrato-examples"><a class="header" href="#simple-vibrato-examples">Simple vibrato examples</a></h1>
+<h2 id="the-while-true-way"><a class="header" href="#the-while-true-way">the <em>while true</em> way</a></h2>
+<pre><code class="language-gwion editable">#import Modules
 
-5.0 =&gt; var float songlength;
+var SinOsc sin ~&gt; dac;
 
-[880.0, 587.0, 440.0, 392.0, 370.0, 392.0] =&gt; var float freqs[];
-[0.5, 1.5, 2.5, 3.0, 3.5, 4.0] =&gt; var float soundtimes[];
-[0.5, 0.5, 1.0, 1.0, 1.0, 1.0] =&gt; var float amps[];
-[20, 20, 20, 20, 20, 20] =&gt; var int num[];
+var SinOsc lfo ~&gt; blackhole;
+4 =&gt; lfo.freq;
+10 =&gt; lfo.amp;
+spork {
+  while(true) {
+    lfo.last() + 215 =&gt; sin.freq;
+    samp =&gt; now;
+  }
+};
+5::second =&gt; now;
 
-var stk.SineWave s[freqs.size()][0];
-var Gain g[freqs.size()][0];
+</code></pre>
+<h2 id="the-sifting-way"><a class="header" href="#the-sifting-way">the <em>Sifting</em> way</a></h2>
+<p>Alternatively you can use the <code>Sift</code> operator</p>
+<pre><code class="language-gwion editable">#import Modules
 
-repeat(i, freqs.size()) {
-    new stk.SineWave[num[i]] =&gt; s[i];
-    new Gain[num[i]] =&gt; g[i];
-    0.5 / num[i] =&gt; const float scale;
-    repeat(j, num[i]) {
-        freqs[i] + j * 1.0 / songlength =&gt; const float freq;
-        freq * soundtimes[i]  =&gt; const float phase;
-        phase =&gt; s[i][j].addPhase;
-        freq =&gt; s[i][j].setFrequency;
-        s[i][j] ~&gt; g[i][j] ~&gt; dac;
-        amps[i]*scale =&gt; g[i][j].gain;
-    }
-}
+var SinOsc sin ~&gt; dac;
 
-songlength::minute =&gt; now;
+var SinOsc lfo ~&gt; blackhole;
+
+4 =&gt; lfo.freq;
+10 =&gt; lfo.amp;
+
+lfo |&gt; \a { return a + 215; } |&gt; sin.freq;
+
+5::second =&gt; now;
 
 </code></pre>
 <!-- added by doc2src.sh -->
@@ -179,10 +182,10 @@ You'll find the source <a href="https://github.com/Gwion/Gwion">here</a>, Luke!
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="vibrato.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="sporth.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="risset_beats.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -191,10 +194,10 @@ You'll find the source <a href="https://github.com/Gwion/Gwion">here</a>, Luke!
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="vibrato.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="sporth.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="risset_beats.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

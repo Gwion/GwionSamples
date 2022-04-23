@@ -77,7 +77,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item affix "><a href="index.html">Gwion Samples</a></li><li class="chapter-item affix "><a href="risset_beats.html">Risset Beats</a></li><li class="chapter-item affix "><a href="sporth.html">A sporth sample</a></li><li class="chapter-item affix "><a href="drone.html">N-Oscillator Drone</a></li></ol>
+                <ol class="chapter"><li class="chapter-item affix "><a href="index.html">Gwion Samples</a></li><li class="chapter-item affix "><a href="vibrato.html">Simple vibrato examples</a></li><li class="chapter-item affix "><a href="risset_beats.html">Risset Beats</a></li><li class="chapter-item affix "><a href="sporth.html">A sporth sample</a></li><li class="chapter-item affix "><a href="drone.html">N-Oscillator Drone</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,6 +143,45 @@
 <p>lorem ipsum</p>
 <h2 id="some-code"><a class="header" href="#some-code">some code</a></h2>
 <pre><code class="language-gwion editable">&lt;&lt;&lt; &quot;Hello, World!&quot; &gt;&gt;&gt;;
+</code></pre>
+<!-- added by doc2src.sh -->
+<footer>
+built with <a href="https://github.com/fennecdjay/mdr">mdr</a> and <a href="https://github.com/rust-lang/mdBook/">mdBook</a></br>
+You'll find the source <a href="https://github.com/Gwion/Gwion">here</a>, Luke!
+</footer>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="simple-vibrato-examples"><a class="header" href="#simple-vibrato-examples">Simple vibrato examples</a></h1>
+<h2 id="the-while-true-way"><a class="header" href="#the-while-true-way">the <em>while true</em> way</a></h2>
+<pre><code class="language-gwion editable">#import Modules
+
+var SinOsc sin ~&gt; dac;
+
+var SinOsc lfo ~&gt; blackhole;
+4 =&gt; lfo.freq;
+10 =&gt; lfo.amp;
+spork {
+  while(true) {
+    lfo.last() + 215 =&gt; sin.freq;
+    samp =&gt; now;
+  }
+};
+5::second =&gt; now;
+
+</code></pre>
+<h2 id="the-sifting-way"><a class="header" href="#the-sifting-way">the <em>Sifting</em> way</a></h2>
+<p>Alternatively you can use the <code>Sift</code> operator</p>
+<pre><code class="language-gwion editable">#import Modules
+
+var SinOsc sin ~&gt; dac;
+
+var SinOsc lfo ~&gt; blackhole;
+
+4 =&gt; lfo.freq;
+10 =&gt; lfo.amp;
+
+lfo |&gt; \a { return a + 215; } |&gt; sin.freq;
+
+5::second =&gt; now;
+
 </code></pre>
 <!-- added by doc2src.sh -->
 <footer>
