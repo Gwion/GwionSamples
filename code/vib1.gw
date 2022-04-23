@@ -3,10 +3,16 @@
 var SinOsc sin ~> dac;
 
 var SinOsc lfo ~> blackhole;
-
 4 => lfo.freq;
 10 => lfo.amp;
 
-lfo |> \a { return a + 215; } |> sin.freq;
+var int base;
 
-5::second => now;
+lfo |> \a { return a + base; } |> sin.freq;
+
+repeat(3) {
+  foreach(note : [ `c3`, `d3`, `e3`, `g3` ]) {
+    note => base;
+    .25::second => now;
+  }
+}
