@@ -177,7 +177,7 @@ var SinOsc lfo ~&gt; blackhole;
 
 var int base;
 
-lfo |&gt; \a { return a + base; } |&gt; sin.freq;
+lfo |&gt; \a { a + base } |&gt; sin.freq;
 
 repeat(3) {
   foreach(note : [ `c3`, `d3`, `e3`, `g3` ]) {
