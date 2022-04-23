@@ -1,0 +1,14 @@
+# Simple vibrato examples
+
+## the *while true* way
+
+```gwion,editable
+@[[code/vib0.gw]]
+```
+## the *Sifting* way
+
+Alternatively you can use the `Sift` operator
+
+```gwion,editable
+@[[code/vib1.gw]]
+```

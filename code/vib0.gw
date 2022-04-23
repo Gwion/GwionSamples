@@ -1,0 +1,14 @@
+#import Modules
+
+var SinOsc sin ~> dac;
+
+var SinOsc lfo ~> blackhole;
+4 => lfo.freq;
+10 => lfo.amp;
+spork {
+  while(true) {
+    lfo.last() + 215 => sin.freq;
+    samp => now;
+  }
+};
+5::second => now;
