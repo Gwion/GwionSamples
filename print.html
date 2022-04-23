@@ -157,14 +157,23 @@ var SinOsc sin ~&gt; dac;
 
 var SinOsc lfo ~&gt; blackhole;
 4 =&gt; lfo.freq;
-10 =&gt; lfo.amp;
+5 =&gt; lfo.amp;
+
+var int base;
+
 spork {
   while(true) {
-    lfo.last() + 215 =&gt; sin.freq;
+    lfo.last() + base =&gt; sin.freq;
     samp =&gt; now;
   }
 };
-5::second =&gt; now;
+
+repeat(3) {
+  foreach(note : [ `c3`, `d3`, `e3`, `g3` ]) {
+    note =&gt; base;
+    .25::second =&gt; now;
+  }
+}
 
 </code></pre>
 <h2 id="the-sifting-way"><a class="header" href="#the-sifting-way">the <em>Sifting</em> way</a></h2>
@@ -174,13 +183,19 @@ spork {
 var SinOsc sin ~&gt; dac;
 
 var SinOsc lfo ~&gt; blackhole;
-
 4 =&gt; lfo.freq;
 10 =&gt; lfo.amp;
 
-lfo |&gt; \a { return a + 215; } |&gt; sin.freq;
+var int base;
 
-5::second =&gt; now;
+lfo |&gt; \a { return a + base; } |&gt; sin.freq;
+
+repeat(3) {
+  foreach(note : [ `c3`, `d3`, `e3`, `g3` ]) {
+    note =&gt; base;
+    .25::second =&gt; now;
+  }
+}
 
 </code></pre>
 <!-- added by doc2src.sh -->
