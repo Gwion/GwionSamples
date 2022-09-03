@@ -1,22 +1,22 @@
 #import STK
 
-5.0 => var float songlength;
+5.0 :=> var float songlength;
 
-[880.0, 587.0, 440.0, 392.0, 370.0, 392.0] => var float freqs[];
-[0.5, 1.5, 2.5, 3.0, 3.5, 4.0] => var float soundtimes[];
-[0.5, 0.5, 1.0, 1.0, 1.0, 1.0] => var float amps[];
-[20, 20, 20, 20, 20, 20] => var int num[];
+[880.0, 587.0, 440.0, 392.0, 370.0, 392.0] :=> var float freqs[];
+[0.5, 1.5, 2.5, 3.0, 3.5, 4.0] :=> var float soundtimes[];
+[0.5, 0.5, 1.0, 1.0, 1.0, 1.0] :=> var float amps[];
+[20, 20, 20, 20, 20, 20] :=> var int num[];
 
 var stk.SineWave s[freqs.size()][0];
 var Gain g[freqs.size()][0];
 
 repeat(i, freqs.size()) {
-    new stk.SineWave[num[i]] => s[i];
-    new Gain[num[i]] => g[i];
-    0.5 / num[i] => const float scale;
+    new stk.SineWave[num[i]] :=> s[i];
+    new Gain[num[i]] :=> g[i];
+    0.5 / num[i] :=> const float scale;
     repeat(j, num[i]) {
-        freqs[i] + j * 1.0 / songlength => const float freq;
-        freq * soundtimes[i]  => const float phase;
+        freqs[i] + j * 1.0 / songlength :=> const float freq;
+        freq * soundtimes[i]  :=> const float phase;
         phase => s[i][j].addPhase;
         freq => s[i][j].setFrequency;
         s[i][j] ~> g[i][j] ~> dac;

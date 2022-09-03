@@ -17,7 +17,7 @@ spork {
 
 repeat(3) {
   foreach(note : [ `c3`, `d3`, `e3`, `g3` ]) {
-    note => base;
+    note :=> base;
     .25::second => now;
   }
 }
