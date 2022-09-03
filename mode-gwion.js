@@ -57,10 +57,10 @@ ace.define("ace/mode/gwion_highlight_rules", ["require", "exports", "module", "a
                 regex: "\\b[a-zA-Z_][\\w\\d]*::"
             }, {
                 token: "keyword.source.gwion",
-                regex: "\\b(?:abstract|defer|repeat|foreach|break|continue|const|var|late|do|else|enum|for|final|if|extends|match|case|private|protect|global|return|self|static|public|class|extends|union|struct|fun|function|locale|operator|funptr|trait|union|where|when|while|new)\\b"
+                regex: "\\b(?:abstract|defer|repeat|foreach|break|continue|const|var|late|do|else|enum|for|final|if|extends|match|case|private|protect|global|return|self|static|public|class|extends|union|struct|fun|function|locale|operator|funptr|trait|union|where|when|while|spork|fork|new)\\b"
             }, {
                 token: "storage.type.source.gwion",
-                regex: "\\b(?:Self|int|float|string|Event|Object|bool|Option|Ref|Array)\\b"
+                regex: "\\b(?:Self|void|int|float|string|Event|Object|bool|Option|Ref|Array)\\b"
             }, {
                 token: "variable.language.source.gwion",
                 regex: "\\b(?:self|this|me|adc|dac)\\b"

@@ -142,23 +142,23 @@
 <p>using beating frequencies to compose music. </p>
 <pre><code class="language-gwion editable">#import STK
 
-5.0 =&gt; var float songlength;
+5.0 :=&gt; var float songlength;
 
-[880.0, 587.0, 440.0, 392.0, 370.0, 392.0] =&gt; var float freqs[];
-[0.5, 1.5, 2.5, 3.0, 3.5, 4.0] =&gt; var float soundtimes[];
-[0.5, 0.5, 1.0, 1.0, 1.0, 1.0] =&gt; var float amps[];
-[20, 20, 20, 20, 20, 20] =&gt; var int num[];
+[880.0, 587.0, 440.0, 392.0, 370.0, 392.0] :=&gt; var float freqs[];
+[0.5, 1.5, 2.5, 3.0, 3.5, 4.0] :=&gt; var float soundtimes[];
+[0.5, 0.5, 1.0, 1.0, 1.0, 1.0] :=&gt; var float amps[];
+[20, 20, 20, 20, 20, 20] :=&gt; var int num[];
 
 var stk.SineWave s[freqs.size()][0];
 var Gain g[freqs.size()][0];
 
 repeat(i, freqs.size()) {
-    new stk.SineWave[num[i]] =&gt; s[i];
-    new Gain[num[i]] =&gt; g[i];
-    0.5 / num[i] =&gt; const float scale;
+    new stk.SineWave[num[i]] :=&gt; s[i];
+    new Gain[num[i]] :=&gt; g[i];
+    0.5 / num[i] :=&gt; const float scale;
     repeat(j, num[i]) {
-        freqs[i] + j * 1.0 / songlength =&gt; const float freq;
-        freq * soundtimes[i]  =&gt; const float phase;
+        freqs[i] + j * 1.0 / songlength :=&gt; const float freq;
+        freq * soundtimes[i]  :=&gt; const float phase;
         phase =&gt; s[i][j].addPhase;
         freq =&gt; s[i][j].setFrequency;
         s[i][j] ~&gt; g[i][j] ~&gt; dac;

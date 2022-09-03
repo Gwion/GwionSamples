@@ -159,7 +159,7 @@ spork {
 
 repeat(3) {
   foreach(note : [ `c3`, `d3`, `e3`, `g3` ]) {
-    note =&gt; base;
+    note :=&gt; base;
     .25::second =&gt; now;
   }
 }
@@ -181,7 +181,7 @@ lfo |&gt; \a { a + base } |&gt; sin.freq;
 
 repeat(3) {
   foreach(note : [ `c3`, `d3`, `e3`, `g3` ]) {
-    note =&gt; base;
+    note :=&gt; base;
     .25::second =&gt; now;
   }
 }
