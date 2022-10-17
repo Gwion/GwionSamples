@@ -3,7 +3,7 @@
 
 110 :=> const float bpm;
 (60.0 / bpm) :: second :=> const dur t;
-[0, 1, 5, 7, 8] :=> const int scale[];
+[0, 1, 5, 7, 8] :=> const int[] scale;
 
 fun void loop_me(const int root) {
   var int stp;
